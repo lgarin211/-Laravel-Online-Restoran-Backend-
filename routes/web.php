@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Kasir;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', [Kasir::class, 'index']);
+
+Route::get('/makeorder', [Kasir::class, 'makeorder']);
+Route::post('/tes1', [Kasir::class, 'jsoncek']);
+
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
