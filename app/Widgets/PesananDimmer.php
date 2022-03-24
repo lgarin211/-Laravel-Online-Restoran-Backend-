@@ -34,7 +34,7 @@ class PesananDimmer extends BaseDimmer
                 'text' => 'Pesanan',
                 'link' => route('voyager.posts.index'),
             ],
-            'image' => 'https://m.media-amazon.com/images/M/MV5BYjM0MDRkYzctMTNhMS00ODYwLTgwMWItZDYxNDlhOGY1YjRlXkEyXkFqcGdeQXVyMzExMzk5MTQ@._V1_FMjpg_UX1000_.jpg',
+            'image' => 'https://productmanagementfestival.com/wp-content/uploads/2017/01/sell-your-product-online.jpg',
         ]));
     }
 

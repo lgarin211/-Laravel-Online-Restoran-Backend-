@@ -19,12 +19,10 @@ use App\Http\Controllers\Kasir;
 // });
 
 Route::get('/', [Kasir::class, 'index']);
-
 Route::get('/makeorder', [Kasir::class, 'makeorder']);
 Route::post('/tes1', [Kasir::class, 'jsoncek']);
-
-
-
-Route::group(['prefix' => 'admin'], function () {
+Route::get('/cliend', [Kasir::class, 'index']);
+Route::group(['prefix' => '/admin'], function () {
     Voyager::routes();
+    Route::get('/export', [Kasir::class, 'export']);
 });

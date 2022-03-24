@@ -55,7 +55,7 @@ return [
     */
 
     'storage' => [
-        'disk' => 'public',
+        'disk' => 'cs1',
     ],
 
     /*
@@ -193,7 +193,7 @@ return [
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'js/c1.js',
     ],
 
     'googlemaps' => [

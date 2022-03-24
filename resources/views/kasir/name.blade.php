@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card text-center">
             <div class="card-header">
-                Featured
+                Selamat Datang Silahkan Masukan Nama Pelanggan
             </div>
             <div class="card-body">
             <form action="{{url('/makeorder')}}" method="get">
@@ -12,7 +12,7 @@
             </form>
             </div>
             <div class="card-footer text-muted">
-                2 days ago
+                {{ setting('kasir.Qoutes') }}
             </div>
         </div>
     </div>

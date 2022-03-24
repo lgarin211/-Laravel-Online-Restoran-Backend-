@@ -4,14 +4,28 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB; 
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
+use App\Exports\PesananExport;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Kasir extends Controller
 {
     //
-    public function index()
+    public function cliend()
     {
         return view('kasir/name');
     }
+
+    public function index()
+    {
+         return view('kasir/name');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PesananExport, 'users.xlsx');
+    }
+
     public function makeorder(Request $request)
     {
         $ren=array(
@@ -37,7 +51,7 @@ class Kasir extends Controller
     {
         // "produk":"produk 3","much":"14"
         $data=array(
-            'id_petugas'=>1,
+            'id_petugas'=>Auth::user()->id,
             'pesanan'=>$request->input('data'),
             'total_harga'=>$request->input('total'),
             'crn'=>$request->input('crn'),
@@ -45,10 +59,14 @@ class Kasir extends Controller
         );
 
         $flight = Pesanan::create($data);
-
-
-        dd($data);
+        // dd($data);
         // dd($ren);
         // dd(json_decode($ren));
+        $this->endcoredata($data);
+    }
+
+    private function endcoredata($data='null')
+    {
+        dd($data);
     }
 }

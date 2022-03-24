@@ -34,7 +34,7 @@ class ItemDimmer extends BaseDimmer
                 'text' => 'Item',
                 'link' => route('voyager.posts.index'),
             ],
-            'image' => 'https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00MDdiLTg4YjktOGY5Yzc2MDUxMTE1XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg',
+            'image' => 'https://catatan.nahrowi.com/wp-content/uploads/2021/06/m-nahrowi-proses-pengembangan-product-baru.jpg',
         ]));
     }
 

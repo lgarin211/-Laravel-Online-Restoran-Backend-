@@ -6,7 +6,7 @@
                         @foreach ($data['data'] as $key=>$index)
                             <div class="col-md-4 ">
                                 <div class="card dasw">
-                                    <img src="{{url('/storage/'.$index->img_item)}}" class="card-img-top" alt="..." style='object-fit: cover;'>
+                                    <img src="{{url('cs1/'.$index->img_item)}}" class="card-img-top" alt="..." style='object-fit: cover;'>
                                     <div class="card-body">
                                         <h5 class="card-title">{{$index->nama_item}}</h5>
                                         <p class="card-text">{!! $index->komposisi_item !!}</p>
@@ -123,10 +123,14 @@
             }
             function mutialia(id) {
                 alert(id)
-                console.log(arima);
+                // console.log(arima);
                 arima.splice(id, 1);
-                console.table(arima);
-                reti(arima)
+                // console.table(arima);
+                sessionStorage.setItem('data', arima);
+                // reti(arima)
+                let data = sessionStorage.getItem('data');
+                // console.log()
+                reti(data)
             }
             function reti(data) {
                 var ami=''

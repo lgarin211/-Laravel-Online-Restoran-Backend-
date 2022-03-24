@@ -1,9 +1,9 @@
         <!-- tinusa -->
         <!-- Product section-->
         <!-- <section class="py-5"> -->
-        <div class="container px-4 px-lg-5 my-5">
+            <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{url('/storage/'.$index->img_item)}}" id='imgitem{{$key}}'></div>
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{url('/cs1/'.$index->img_item)}}" id='imgitem{{$key}}'></div>
                     <div class="col-md-6">
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="{{'q'.$key}}" type="num" value="1" style="max-width: 3rem">
@@ -26,6 +26,5 @@
                     </div>
                 </div>
             </div>
-
         <!-- </section> -->
         <!-- Related items section-->
