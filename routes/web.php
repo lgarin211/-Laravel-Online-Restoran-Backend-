@@ -17,11 +17,14 @@ use App\Http\Controllers\Kasir;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+    Route::get('/', [Kasir::class, 'makeorder']);
+    Route::get('/makeorder', [Kasir::class, 'makeorder']);
+    Route::get('/chart', [Kasir::class, 'chart']);
+    Route::get('/struck', [Kasir::class, 'make_struck']);
+    Route::post('/tes1', [Kasir::class, 'jsoncek']);
+    Route::get('/cliend', [Kasir::class, 'index']);
+    Route::get('/liststruck', [Kasir::class, 'list_struck']);
 
-Route::get('/', [Kasir::class, 'index']);
-Route::get('/makeorder', [Kasir::class, 'makeorder']);
-Route::post('/tes1', [Kasir::class, 'jsoncek']);
-Route::get('/cliend', [Kasir::class, 'index']);
 Route::group(['prefix' => '/admin'], function () {
     Voyager::routes();
     Route::get('/export', [Kasir::class, 'export']);

@@ -9,17 +9,17 @@
                         @empty(!Auth::user())
                         {!!menu('kasir','casevmenu')!!}
                         @else
-                            <li class=" nav-item">
+                            {{-- <li class=" nav-item">
                                 <a href="{{ url('admin/login') }} " class="nav-link">
                                 <span>{{ $item->title }}</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
-<!--                             <li class=" nav-item">
+                            {{-- <li class=" nav-item">
                                 <a href="{{ url('admin/login') }} " class="nav-link">
                                 <span>{{ $item->title }}</span>
                                 </a>
-                            </li> -->
+                            </li>  --}}
 
                         @endempty
 

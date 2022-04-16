@@ -18,7 +18,7 @@ class Kasir extends Controller
 
     public function index()
     {
-         return view('kasir/name');
+        return view('kasir2/produk');
     }
 
     public function export()
@@ -27,29 +27,54 @@ class Kasir extends Controller
     }
 
     public function makeorder(Request $request)
-    {
-        $ren=array(
-            0=>array(
-                'produk'=>'produk 3',
-                'much'=>'14',
-                'price'=>14000,
-            ),
-            1=>array(
-                'produk'=>'produk1',
-                'much'=>'155',
-                'price'=>1860000,
-            ),
-        );
-        // dd(json_encode($ren),json_decode(json_encode($ren)));
-        $nama = $request->input('nama');
+    {   
+        if (!empty($request->id_produk)) {
+            $nama = $request->input('nama');
+        }else{
+            $nama='no name';
+        }
         $data['nama'] = $nama;
-        $data['data']=DB::table('Item_sell')->get();
-        // dd($data);
-        return view('kasir/itemv2', ['data' => $data]);
+        $data['data']=DB::table('Item_sell')->inRandomOrder()->get();
+        return view('kasir2/produk', ['data' => $data]);
     }
+
+    public function make_struck()
+    {
+        $id=$_GET['id'];
+        $data['data']=DB::table('Pesanan')->where('id',$id)->first();
+        return view('kasir2/struck', ['data' => $data]);
+    }
+
+    public function chart()
+    {   
+        $data['data']=DB::table('Item_sell')->inRandomOrder()->get();
+        return view('kasir2/produkChart', ['data' => $data]);
+    }
+
+    public function addorder(Request $request)
+    {
+        $id = $request->input('id');
+        $nama = $request->input('nama');
+        $harga = $request->input('harga');
+        $jumlah = $request->input('jumlah');
+        $total = $request->input('total');
+        $data['id'] = $id;
+        $data['nama'] = $nama;
+        $data['harga'] = $harga;
+        $data['jumlah'] = $jumlah;
+        $data['total'] = $total;
+        return view('kasir2/produk', ['data' => $data]);
+    }
+
+    public function list_struck()
+    {
+        $data['data']=DB::table('Pesanan')->where('id_petugas','=',Auth::user()->id)->orderby('created_at','desc')->get();
+        return view('kasir2/tableofChart', $data);
+    }
+    
+
     public function jsoncek(Request $request)
     {
-        // "produk":"produk 3","much":"14"
         $data=array(
             'id_petugas'=>Auth::user()->id,
             'pesanan'=>$request->input('data'),
@@ -59,10 +84,9 @@ class Kasir extends Controller
         );
 
         $flight = Pesanan::create($data);
-        // dd($data);
-        // dd($ren);
-        // dd(json_decode($ren));
-        $this->endcoredata($data);
+
+        return redirect('/struck?id='.$flight->id);
+        // $this->endcoredata($data);
     }
 
     private function endcoredata($data='null')
