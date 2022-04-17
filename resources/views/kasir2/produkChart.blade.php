@@ -58,36 +58,46 @@
         </div>
 
         <div class="section mb-2">
-            <form action="{{url('/tes1')}}" method="POST">
+            <form action="{{ url('/tes1') }}" method="POST">
                 @csrf
                 <input type="hidden" name="data" id="datapesanan">
                 <input type="hidden" name="total" id="totalpesanan">
                 <input type="hidden" name="crn" value="Makan Di Tempat">
                 <input type="hidden" name="nama_pemesan" value="non">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Order Now</button>
+                <style>
+                    .jasi{
+                        display: none;
+                    }
+                </style>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="order_btin" onclick="buma()">Order Now</button>
             </form>
         </div>
     </div>
     <!-- * App Capsule -->
 
-    
+
 
     <script>
-        var datapesanan=[];
-        var total=0;
-
-        formdataset=()=>{
-            document.getElementById('datapesanan').value= JSON.stringify(datapesanan);
-            document.getElementById('totalpesanan').value=total;
+        buma = ()=>{
+            // document.getElementById('order_btin').
+            console.log('upcer')
         }
 
-        load_chart=()=>{
-                var inbin='';
-                var data=JSON.parse(sessionStorage.getItem('datapesanan'));
-                for (var i=0;i<data.length;i++){
-                    var item=data[i];
-                    total+=item.total_price;
-                    inbin+=`
+        var datapesanan = [];
+        var total = 0;
+
+        formdataset = () => {
+            document.getElementById('datapesanan').value = JSON.stringify(datapesanan);
+            document.getElementById('totalpesanan').value = total;
+        }
+
+        load_chart = () => {
+            var inbin = '';
+            var data = JSON.parse(sessionStorage.getItem('datapesanan'));
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                total += item.total_price;
+                inbin += `
                     <div class="card cart-item mb-2">
                         <div class="card-body">
                             <div class="in">
@@ -109,38 +119,40 @@
                         </div>
                     </div>
                     `;
-                }
-                document.getElementById('chartpin').innerHTML=inbin;
-                datapesanan=data;
-                
-                var tax=total*10/100;
-                var all=total+tax;
-
-                document.getElementById('linbin_total').innerHTML=`RP. ${total}`;
-                document.getElementById('linbin_tax').innerHTML=`RP. ${tax}`;
-                document.getElementById('all_bin').innerHTML=`RP. ${all}`;
-
-                formdataset();
-        }
-
-        function removeitem(i){
-                    datapesanan.splice(i,1);
-                    sessionStorage.setItem('datapesanan',JSON.stringify(datapesanan));
-                    load_chart();
-        }
-        
-        function touchmuch(type,i){
-            var data=JSON.parse(sessionStorage.getItem('datapesanan'));
-            if(type=='m'){
-                if(data[i].quantity>1){
-                    data[i].quantity--;
-                    data[i].total_price=data[i].quantity*data[i].price;
-                }
-            }else{
-                data[i].quantity++;
-                data[i].total_price=data[i].quantity*data[i].price;
             }
-            sessionStorage.setItem('datapesanan',JSON.stringify(data));
+            document.getElementById('chartpin').innerHTML = inbin;
+            datapesanan = data;
+
+            var tax = total * 10 / 100;
+            var all = total + tax;
+
+            document.getElementById('linbin_total').innerHTML = `RP. ${total}`;
+            document.getElementById('linbin_tax').innerHTML = `RP. ${tax}`;
+            document.getElementById('all_bin').innerHTML = `RP. ${all}`;
+
+            formdataset();
+        }
+
+        function removeitem(i) {
+            datapesanan.splice(i, 1);
+            sessionStorage.setItem('datapesanan', JSON.stringify(datapesanan));
+            load_chart();
+        }
+
+        function touchmuch(type, i) {
+            console.log(type,i);
+            var data = JSON.parse(sessionStorage.getItem('datapesanan'));
+            console.log(data)
+            if (type == 'm') {
+                if (data[i].quantity > 1) {
+                    data[i].quantity--;
+                    data[i].total_price = data[i].quantity * data[i].priceone;
+                }
+            } else {
+                data[i].quantity++;
+                data[i].total_price = data[i].quantity * data[i].priceone;
+            }
+            sessionStorage.setItem('datapesanan', JSON.stringify(data));
             load_chart();
         }
         load_chart();

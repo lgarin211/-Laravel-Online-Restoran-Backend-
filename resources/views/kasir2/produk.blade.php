@@ -42,7 +42,7 @@
                                         <div class="d-flex">
                                             <div class="stepper stepper-sm stepper-secondary">
                                                 <a href="#" class="stepper-button stepper-down">-</a>
-                                                <input type="text" class="form-control" value="12" disabled
+                                                <input type="number" class="form-control" value="12" disabled
                                                     style="width: 100%" id="{{ 'much' . $key }}">
                                                 <a href="#" class="stepper-button stepper-up">+</a>
                                             </div>
@@ -112,6 +112,7 @@
                 datapesanan.push(data);
                 totalhargapesanan += data.total_price;
                 savetostore();
+                ibuni();
             }
 
             savetostore = () => {

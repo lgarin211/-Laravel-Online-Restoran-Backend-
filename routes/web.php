@@ -17,6 +17,10 @@ use App\Http\Controllers\Kasir;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/cencel', function () {
+    dump('cencel');
+});
+
     Route::get('/', [Kasir::class, 'makeorder']);
     Route::get('/makeorder', [Kasir::class, 'makeorder']);
     Route::get('/chart', [Kasir::class, 'chart']);
@@ -24,6 +28,8 @@ use App\Http\Controllers\Kasir;
     Route::post('/tes1', [Kasir::class, 'jsoncek']);
     Route::get('/cliend', [Kasir::class, 'index']);
     Route::get('/liststruck', [Kasir::class, 'list_struck']);
+    Route::get('/idopin', [Kasir::class, 'idopin']);
+
 
 Route::group(['prefix' => '/admin'], function () {
     Voyager::routes();
