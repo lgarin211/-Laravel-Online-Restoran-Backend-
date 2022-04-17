@@ -32,9 +32,9 @@ class Kasir extends Controller
         $body['product']    = $produk;
         $body['qty']        = $quantity;
         $body['price']      = $priceone;
-        $body['returnUrl']  = 'https://startcode_001-yecebot863878792.codeanyapp.com/struck?id='.$data->id;
-        $body['cancelUrl']  = 'https://startcode_001-yecebot863878792.codeanyapp.com/cencel';
-        $body['notifyUrl']  = 'https://startcode_001-yecebot863878792.codeanyapp.com/struck?id='.$data->id;
+        $body['returnUrl']  = url('struck?id='.$data->id);
+        $body['cancelUrl']  = url('cencel');
+        $body['notifyUrl']  = url('struck?id='.$data->id);
         //End Request Body//
 
         //Generate Signature
