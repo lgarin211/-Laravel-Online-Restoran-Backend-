@@ -14,6 +14,7 @@ class VoyagerAuthController extends Controller
     public function login()
     {
         if ($this->guard()->user()) {
+            // dd('arca');
             return redirect()->route('voyager.dashboard');
         }
 
@@ -52,6 +53,10 @@ class VoyagerAuthController extends Controller
      */
     public function redirectTo()
     {
+        // dd(Auth::user())
+        if(Auth::user()->role_id==2){
+            return redirect('/');
+        }
         return config('voyager.user.redirect', route('voyager.dashboard'));
     }
 

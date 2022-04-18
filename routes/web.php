@@ -22,6 +22,8 @@ Route::get('/cencel', function () {
 });
 
     Route::get('/', [Kasir::class, 'makeorder']);
+    Route::get('/produk', [Kasir::class, 'makeorder']);
+    //
     Route::get('/makeorder', [Kasir::class, 'makeorder']);
     Route::get('/chart', [Kasir::class, 'chart']);
     Route::get('/struck', [Kasir::class, 'make_struck']);
