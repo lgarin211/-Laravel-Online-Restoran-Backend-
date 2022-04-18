@@ -6,6 +6,7 @@ use App\Models\Pesanan;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\Auth;
 
 class PesananExport implements FromView
 {
@@ -28,8 +29,12 @@ class PesananExport implements FromView
 
         $fore=DB::table('users')
                 ->join('roles', 'roles.id', '=', 'users.role_id')
-                ->select('users.name as namaLengkap','roles.*','users.*')
-                ->where('roles.display_name','Kasir')->get();
+                ->select('users.name as namaLengkap','roles.*','users.*');
+                    if (Auth::user()->role_id==2) {
+                        $fore=$fore->where('users.id',Auth::user()->id);
+                    }
+                }
+        $fore=$fore->where('roles.display_name','Kasir')->get();
         foreach ($fore as $key => $masl) {
             $data1[$key]['item']=DB::table('Pesanan')
                     ->join('users', 'users.id', '=', 'Pesanan.id_petugas')

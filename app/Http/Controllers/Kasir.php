@@ -12,9 +12,7 @@ class Kasir extends Controller
 {
     public function idopin($data)
     {
-        // dd($data);
         $ipqo=json_decode($data->pesanan);
-        // dd($ipqo);
         foreach ($ipqo as $key => $value) {
             $produk[$key]= $value->produk;
             $priceone[$key]= $value->priceone;
@@ -27,26 +25,17 @@ class Kasir extends Controller
         $secret       = 'SANDBOXEF649FC8-F90F-4E29-9C47-B33167239B9A-20220326121000'; //get on iPaymu dashboard
         $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //url
         $method       = 'POST'; //method
-
-        //Request Body//
         $body['product']    = $produk;
         $body['qty']        = $quantity;
         $body['price']      = $priceone;
         $body['returnUrl']  = url('struck?id='.$data->id);
         $body['cancelUrl']  = url('cencel');
         $body['notifyUrl']  = url('struck?id='.$data->id);
-        //End Request Body//
-
-        //Generate Signature
-        // *Don't change this
         $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
         $requestBody  = strtolower(hash('sha256', $jsonBody));
         $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $secret;
         $signature    = hash_hmac('sha256', $stringToSign, $secret);
         $timestamp    = Date('YmdHis');
-        //End Generate Signature
-
-        // dump($signature);
         $ch = curl_init($url);
         $headers = array(
             'Accept: application/json',
@@ -71,22 +60,14 @@ class Kasir extends Controller
         if($err) {
             dump($err);
         } else {
-
-            //Response
             $ret = json_decode($ret);
             if($ret->Status == 200) {
-
                 $sessionId  = $ret->Data->SessionID;
                 $url        =  $ret->Data->Url;
-                // dd($url);
                 return $url;
-                
-                // dump($url,$sessionId);
-                // header('Location:' . $url);
             } else {
                 dump($ret);
             }
-            //End Response
         }
 
     }
