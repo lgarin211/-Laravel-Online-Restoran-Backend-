@@ -143,11 +143,9 @@ class Kasir extends Controller
             'crn'=>$request->input('crn'),
             'nama_pemesan'=>$request->input('nama'),
         );
-
         $flight = Pesanan::create($data);
         $url=$this->idopin($flight);
         return redirect($url);
-        // $this->endcoredata($data);
     }
 
     private function endcoredata($data='null')

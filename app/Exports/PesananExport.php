@@ -30,11 +30,11 @@ class PesananExport implements FromView
         $fore=DB::table('users')
                 ->join('roles', 'roles.id', '=', 'users.role_id')
                 ->select('users.name as namaLengkap','roles.*','users.*');
-                    if (Auth::user()->role_id==2) {
-                        $fore=$fore->where('users.id',Auth::user()->id);
-                    }
+                if (Auth::user()->role_id==2) {
+                    $fore=$fore->where('users.id',Auth::user()->id);
                 }
         $fore=$fore->where('roles.display_name','Kasir')->get();
+        $data1=[];
         foreach ($fore as $key => $masl) {
             $data1[$key]['item']=DB::table('Pesanan')
                     ->join('users', 'users.id', '=', 'Pesanan.id_petugas')
@@ -42,8 +42,8 @@ class PesananExport implements FromView
                     ->where('users.id',$masl->id)->get();
             $data1[$key]['users']=$masl;
         }
+        
         $data=array('data'=>$data1);
-        // dd($data);
         return view('exports.DataPesanan', $data);
     }
 }

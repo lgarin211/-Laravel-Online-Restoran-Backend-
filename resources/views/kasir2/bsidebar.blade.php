@@ -134,11 +134,8 @@
                     <a href="{{url('/admin/profile')}}" class="button">
                         <ion-icon name="person-outline"></ion-icon>
                     </a>
-                    <a href="javascript:;" class="button">
+                    <a href="{{url('/admin/export')}}" target="_blank" class="button">
                         <ion-icon name="archive-outline"></ion-icon>
-                    </a>
-                    <a href="javascript:;" class="button">
-                        <ion-icon name="settings-outline"></ion-icon>
                     </a>
                     <form action="{{url('/admin/logout')}}" method="POST">
                         @csrf
