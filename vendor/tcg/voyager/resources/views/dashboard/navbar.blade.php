@@ -5,7 +5,7 @@
                 <span class="hamburger-inner"></span>
             </button>
             @section('breadcrumbs')
-            <ol class="breadcrumb hidden-xs">
+            <ol class="breadcrumb hidden-xs " @if(Auth::user()->role_id==2) style="display: none;"@endif>
                 @php
                 $segments = array_filter(explode('/', str_replace(route('voyager.dashboard'), '', Request::url())));
                 $url = route('voyager.dashboard');

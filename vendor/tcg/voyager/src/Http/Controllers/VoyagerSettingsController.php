@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Auth;
 
 class VoyagerSettingsController extends Controller
 {
+
     public function index()
     {
         // Check permission
@@ -110,6 +112,10 @@ class VoyagerSettingsController extends Controller
         }
 
         request()->flashOnly('setting_tab');
+
+        if (Auth::user()->role_id==2) {
+            return redirect('/');
+        }
 
         return back()->with([
             'message'    => __('voyager::settings.successfully_saved'),
